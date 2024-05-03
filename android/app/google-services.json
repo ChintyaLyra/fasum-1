@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "958725257859-dmlejv9tabho8lsbj8k66b35ofm0e7js.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fasum",
+            "certificate_hash": "7f982f858aca3f70a7e47be567cc2d4dd381e750"
+          }
+        },
+        {
           "client_id": "958725257859-vsge35junnfd37oae5vk878pqt4o6c73.apps.googleusercontent.com",
           "client_type": 3
         }

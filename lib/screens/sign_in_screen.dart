@@ -9,11 +9,12 @@ final googleSignIn = GoogleSignIn(
     'email',
   ],
   clientId:
-  '958725257859-vsge35junnfd37oae5vk878pqt4o6c73.apps.googleusercontent.com',
+      '958725257859-vsge35junnfd37oae5vk878pqt4o6c73.apps.googleusercontent.com',
 );
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key});
+
   @override
   SignInScreenState createState() => SignInScreenState();
 }
@@ -28,7 +29,7 @@ class SignInScreenState extends State<SignInScreen> {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+            await googleUser.authentication;
         final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
@@ -79,6 +80,24 @@ class SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () async {
+                  final email = _emailController.text.trim();
+                  final password = _passwordController.text;
+                  // Validasi email
+                  if (email.isEmpty || !isValidEmail(email)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Please enter a valid email')),
+                    );
+                    return;
+                  }
+                  // Validasi password
+                  if (password.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Please enter your password')),
+                    );
+                    return;
+                  }
                   try {
                     await FirebaseAuth.instance.signInWithEmailAndPassword(
                       email: _emailController.text,
@@ -88,6 +107,31 @@ class SignInScreenState extends State<SignInScreen> {
                       MaterialPageRoute(
                           builder: (context) => const HomeScreen()),
                     );
+                  } on FirebaseAuthException catch (error) {
+                    print('Error code: ${error.code}');
+                    if (error.code == 'user-not-found') {
+                      // Jika email tidak terdaftar, tampilkan pesan kesalahan
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('No user found with that email')),
+                      );
+                    } else if (error.code == 'wrong-password') {
+                      // Jika password salah, tampilkan pesan kesalahan
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Wrong password. Please try again.')),
+                      );
+                    } else {
+                      // Jika terjadi kesalahan lain, tampilkan pesan kesalahan umum
+                      setState(() {
+                        _errorMessage = error.message ?? 'An error occurred';
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(_errorMessage),
+                        ),
+                      );
+                    }
                   } catch (error) {
                     setState(() {
                       _errorMessage = error.toString();
@@ -105,8 +149,7 @@ class SignInScreenState extends State<SignInScreen> {
               ElevatedButton.icon(
                   onPressed: _signInWIthGoogle,
                   icon: Image.asset('assets/images/google.png',
-                  width:30,
-                  height: 30),
+                      width: 25, height: 25),
                   label: const Text(
                     'Sign In with Google',
                   )),
@@ -126,5 +169,13 @@ class SignInScreenState extends State<SignInScreen> {
         ),
       ),
     );
+  }
+
+  // Fungsi untuk memeriksa validitas email
+  bool isValidEmail(String email) {
+    String emailRegex =
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+    RegExp regex = RegExp(emailRegex);
+    return regex.hasMatch(email);
   }
 }

@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -59,6 +56,7 @@ class DefaultFirebaseOptions {
     appId: '1:958725257859:android:6e0d24fc784b4f888db9b6',
     messagingSenderId: '958725257859',
     projectId: 'fasum-app-3fbac',
+    databaseURL: 'https://fasum-app-3fbac-default-rtdb.firebaseio.com',
     storageBucket: 'fasum-app-3fbac.appspot.com',
   );
 
@@ -69,16 +67,32 @@ class DefaultFirebaseOptions {
     projectId: 'fasum-app-3fbac',
     databaseURL: 'https://fasum-app-3fbac-default-rtdb.firebaseio.com',
     storageBucket: 'fasum-app-3fbac.appspot.com',
+    androidClientId: '958725257859-dmlejv9tabho8lsbj8k66b35ofm0e7js.apps.googleusercontent.com',
+    iosClientId: '958725257859-idj6ds3k5hiqersa42d74osq033m95uc.apps.googleusercontent.com',
     iosBundleId: 'com.example.fasum',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDEMlf6MVJZIavgkRMi-T0ugTFfhEHOZXY',
-    appId: '1:958725257859:ios:ca48a965755415258db9b6',
+    appId: '1:958725257859:ios:60dbbe5e68632fa88db9b6',
     messagingSenderId: '958725257859',
     projectId: 'fasum-app-3fbac',
     databaseURL: 'https://fasum-app-3fbac-default-rtdb.firebaseio.com',
     storageBucket: 'fasum-app-3fbac.appspot.com',
-    iosBundleId: 'com.example.fasum.RunnerTests',
+    androidClientId: '958725257859-dmlejv9tabho8lsbj8k66b35ofm0e7js.apps.googleusercontent.com',
+    iosClientId: '958725257859-idj6ds3k5hiqersa42d74osq033m95uc.apps.googleusercontent.com',
+    iosBundleId: 'com.example.fasum',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyC3wSuyd79-z-HVWVYHLGlrJZbfLki--DY',
+    appId: '1:958725257859:web:c444f61be35ff0ca8db9b6',
+    messagingSenderId: '958725257859',
+    projectId: 'fasum-app-3fbac',
+    authDomain: 'fasum-app-3fbac.firebaseapp.com',
+    databaseURL: 'https://fasum-app-3fbac-default-rtdb.firebaseio.com',
+    storageBucket: 'fasum-app-3fbac.appspot.com',
+    measurementId: 'G-YDT9Y3BPCN',
+  );
+
 }
