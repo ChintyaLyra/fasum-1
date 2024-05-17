@@ -34,7 +34,7 @@ class _AddPostScreenState extends State<PostScreen> {
                 width: 200,
                 height: 200,
                 decoration: BoxDecoration(
-                    color: Colors.lightBlue[100],
+                    color: Colors.lightBlue[300],
                     borderRadius: BorderRadius.circular(90)),
                 child: _image != null
                     ? Image.file(File(_image!.path))
@@ -52,7 +52,7 @@ class _AddPostScreenState extends State<PostScreen> {
             SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.grey,
                   textStyle: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class _AddPostScreenState extends State<PostScreen> {
 
                   // Add Firebase Cloud Firestore functionality here
                   final CollectionReference posts =
-                  FirebaseFirestore.instance.collection('addpost');
+                  FirebaseFirestore.instance.collection('test');
                   await posts.add({
                     'text': _TextController.text,
                     'image_url': downloadUrl,
