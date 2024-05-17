@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const PostScreen()
+          MaterialPageRoute(builder: (context) => PostScreen()
           ),
         ),
         tooltip: "Add Post",

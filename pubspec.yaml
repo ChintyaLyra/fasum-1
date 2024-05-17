@@ -44,6 +44,8 @@ dependencies:
   firebase_database: ^10.4.0
   camera: ^0.10.5+9
   image_picker: ^1.0.8
+  cloud_firestore: ^4.14.0
+  firebase_storage: ^11.6.0
 
 dev_dependencies:
   flutter_test:
